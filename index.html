@@ -2,11 +2,29 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <title>The Personal Site of John McAvey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-vapable" content="yes">
+    <meta name="mobile-web-app-capable" content=yes>
+    <script src="bower_components/platform/platform.js"></script>
+    <link rel="import" href ="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+    <link rel="stylesheet" href="main.css">
+
+    <title>John McAvey</title>
 </head>
-<body>
+<body fullbleed>
+    <core-toolbar>
+        </core-icon-button>
+        <paper-icon-button icon="menu"></paper-icon-button>
+        <div>My App</div>
+        <span flex></span>
+        <paper-icon-button icon="search"></paper-icon-button>
+    </core-toolbar>
+
+    
     <h1>Sorry, I'm still under construction</h1>
-    <p>Check back in a little while, I'll be up soon enough!</p>
+    <p>There are no guarantees about functionality (or spelling, for that matter) right now.  Check back in a little while, I'll be up soon enough!</p>
+    
 </body>
 </html>
