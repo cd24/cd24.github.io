@@ -1,4 +1,15 @@
-core-toolbar {
-    background-color: #03A9F4;
-    color: white;
+body{
+    margin: 30px;
+}
+
+h1 {
+    margin: 30px;
+}
+
+p {
+    margin: 30px;
+}
+paper-button {
+    margin: 20px;
+    font-size: 10px;
 }
