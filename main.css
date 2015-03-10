@@ -1,15 +1,19 @@
-body{
-    margin: 30px;
+body {
+  font-family: sans-serif;
 }
-
-h1 {
-    margin: 30px;
+core-header-panel {
+  background: white;
 }
-
-p {
-    margin: 30px;
+core-toolbar {
+  background-color: #03A9F4;
 }
-paper-button {
-    margin: 20px;
-    font-size: 10px;
+#navheader {
+  background-color: #03A9F4;
+}
+.content {
+  padding: 20px;
+}
+    
+core-drawer-panel:not([narrow]) #navicon {
+  display: none;
 }
