@@ -5,3 +5,4 @@ document.addEventListener('polymer-ready', function() {
     drawerPanel.togglePanel();
   });
 });
+
