@@ -44,8 +44,12 @@ core-menu > paper-item.core-selected {
   background: #e1f5fe;
 }
 
-h1, p, img {
-    margin: 20px;
+h1, {
+    margin: 10px;
+}
+
+h2, p, img {
+    margin-left: 20px;
 }
 
 @media all and (max-width: 600px) {
