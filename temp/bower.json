@@ -24,6 +24,7 @@
     "core-toolbar": "Polymer/core-toolbar#~0.5.5",
     "paper-icon-button": "Polymer/paper-icon-button#~0.5.5",
     "paper-progress": "Polymer/paper-progress#~0.5.5",
-    "platform": "Polymer/platform#~0.4.2"
+    "platform": "Polymer/platform#~0.4.2",
+    "jquery": "~2.1.3"
   }
 }
