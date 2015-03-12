@@ -7,7 +7,7 @@ var template = document.querySelector('#t');
 
 template.pages = [
   {name: 'Home', hash: 'one'},
-  {name: 'About Us', hash: 'two'},
+  {name: 'About Me', hash: 'two'},
   {name: 'Projects', hash: 'three'}
 ];
 

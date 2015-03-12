@@ -8,10 +8,9 @@ var ajax, pages, scaffold;
 var cache = {};
 
 template.pages = [
-  {name: 'Shadow DOM 101', hash: 'one', url: '//www.html5rocks.com/en/tutorials/webcomponents/shadowdom/'},
-  {name: 'Shadow DOM 201', hash: 'two', url: '//www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/'},
-  {name: 'Shadow DOM 301', hash: 'three', url: '//www.html5rocks.com/en/tutorials/webcomponents/shadowdom-301/'},
-  {name: 'Custom Elements', hash: 'four', url: '//www.html5rocks.com/en/tutorials/webcomponents/customelements/'}
+  {name: 'Home', hash: 'one', url: '../pages/home.html'},
+  {name: 'About Me', hash: 'two', url: '../pages/about.html'},
+  {name: 'Projects', hash: 'three', url: '../pages/projects.html'}
 ];
 
 template.addEventListener('template-bound', function(e) {
@@ -60,9 +59,8 @@ template.menuItemSelected = function(e, detail, sender) {
 
     // Need to wait one rAF so <core-ajax> has it's URL set.
     this.async(function() {
-      if (!cache[ajax.url]) {
-        ajax.go();
-      }
+      ajax.go();
+      
 
       scaffold.closeDrawer();
     });
@@ -75,18 +73,10 @@ template.ajaxLoad = function(e, detail, sender) {
 };
 
 template.onResponse = function(e, detail, sender) {
-  var article = detail.response.querySelector('#article-content');
-
-  article.querySelector('.byline').remove();
-
-  // Fix up image paths to not be local.
-  [].forEach.call(article.querySelectorAll('img'), function(img) {
-    img.setAttribute('src', img.src);
-  });
+  var article = detail.response.querySelector("#content");
+  console.log(article.innerHTML);
 
   var html = article.innerHTML;
-
-  cache[ajax.url] = html; // Primitive caching by URL.
 
   this.injectBoundHTML(html, pages.selectedItem.firstElementChild);
 };
