@@ -74,8 +74,6 @@ template.ajaxLoad = function(e, detail, sender) {
 
 template.onResponse = function(e, detail, sender) {
   var article = detail.response.querySelector("#content");
-  console.log(article.innerHTML);
-
   var html = article.innerHTML;
 
   this.injectBoundHTML(html, pages.selectedItem.firstElementChild);

@@ -49,7 +49,18 @@ h1, {
 }
 
 h2, p, img {
-    margin-left: 20px;
+    margin: 20px;
+    align-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: blue;
 }
 
 @media all and (max-width: 600px) {
