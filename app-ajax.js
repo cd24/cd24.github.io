@@ -1,16 +1,16 @@
 (function() {
 "use strict";
 
-var DEFAULT_ROUTE = 'one';
+var DEFAULT_ROUTE = 'home';
 
 var template = document.querySelector('#t');
 var ajax, pages, scaffold;
 var cache = {};
 
 template.pages = [
-  {name: 'Home', hash: 'one', url: '../Pages/home.html'},
-  {name: 'About Me', hash: 'two', url: '../Pages/about.html'},
-  {name: 'Projects', hash: 'three', url: '../Pages/projects.html'}
+  {name: 'Home', hash: 'home', url: '../Pages/home.html'},
+  {name: 'About Me', hash: 'about', url: '../Pages/about.html'},
+  {name: 'Projects', hash: 'projects', url: '../Pages/projects.html'}
 ];
 
 template.addEventListener('template-bound', function(e) {
@@ -56,12 +56,8 @@ template.keyHandler = function(e, detail, sender) {
 
 template.menuItemSelected = function(e, detail, sender) {
   if (detail.isSelected) {
-
-    // Need to wait one rAF so <core-ajax> has it's URL set.
     this.async(function() {
       ajax.go();
-      
-
       scaffold.closeDrawer();
     });
 
