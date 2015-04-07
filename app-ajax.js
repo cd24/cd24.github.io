@@ -10,7 +10,8 @@ var cache = {};
 template.pages = [
   {name: 'Home', hash: 'home', url: '../Pages/home.html'},
   {name: 'About Me', hash: 'about', url: '../Pages/about.html'},
-  {name: 'Projects', hash: 'projects', url: '../Pages/projects.html'}
+  {name: 'Projects', hash: 'projects', url: '../Pages/projects.html'},
+    { name: 'Web Projects', hash: 'webprojects', url: '../Pages/webbuilds.html'}
 ];
 
 template.addEventListener('template-bound', function(e) {
