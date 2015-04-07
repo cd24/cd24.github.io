@@ -11,11 +11,9 @@ core-animated-pages {
 }
 
 core-animated-pages > * {
-  border-radius: 5px;
   font-size: 20px;
   background-color: white;
   align-content:stretch;
-  margin: 10px;
   vertical-align: text-top;
     
 }
@@ -48,6 +46,10 @@ h1 {
     margin: 5px;
 }
 
+h3 {
+    margin: 5px;
+}
+
 h2, p, img {
     margin: 10px;
     align-content: center;
@@ -60,6 +62,10 @@ p{
 a {
     text-decoration: none;
     color: black;
+}
+
+li {
+    margin: 5px;
 }
 
 a:hover {
