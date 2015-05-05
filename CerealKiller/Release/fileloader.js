@@ -24,8 +24,8 @@ Module.expectedDataFileDownloads++;
     var REMOTE_PACKAGE_NAME = typeof Module['locateFile'] === 'function' ?
                               Module['locateFile'](REMOTE_PACKAGE_BASE) :
                               ((Module['filePackagePrefixURL'] || '') + REMOTE_PACKAGE_BASE);
-    var REMOTE_PACKAGE_SIZE = 10092433;
-    var PACKAGE_UUID = 'a41f3f79-7f50-47ef-a805-aa4c45fc0447';
+    var REMOTE_PACKAGE_SIZE = 10092319;
+    var PACKAGE_UUID = 'bd30de6d-7f59-48c3-9d57-ef1565244e32';
   
     function fetchRemotePackage(packageName, packageSize, callback, errback) {
       var xhr = new XMLHttpRequest();
@@ -126,16 +126,16 @@ Module['FS_createPath']('/', 'Resources', true, true);
       new DataRequest(0, 13672, 0, 0).open('GET', '/level0');
     new DataRequest(13672, 24420, 0, 0).open('GET', '/level1');
     new DataRequest(24420, 33284, 0, 0).open('GET', '/level2');
-    new DataRequest(33284, 67376, 0, 0).open('GET', '/mainData');
-    new DataRequest(67376, 67968, 0, 0).open('GET', '/methods_pointedto_by_uievents.xml');
-    new DataRequest(67968, 3549932, 0, 0).open('GET', '/sharedassets0.assets');
-    new DataRequest(3549932, 5211692, 0, 0).open('GET', '/sharedassets0.resource');
-    new DataRequest(5211692, 5761272, 0, 0).open('GET', '/sharedassets1.assets');
-    new DataRequest(5761272, 8009329, 0, 0).open('GET', '/sharedassets1.resource');
-    new DataRequest(8009329, 8013653, 0, 0).open('GET', '/sharedassets2.assets');
-    new DataRequest(8013653, 8017953, 0, 0).open('GET', '/sharedassets3.assets');
-    new DataRequest(8017953, 9578325, 0, 0).open('GET', '/Resources/unity_default_resources');
-    new DataRequest(9578325, 10092433, 0, 0).open('GET', '/Resources/unity_builtin_extra');
+    new DataRequest(33284, 67328, 0, 0).open('GET', '/mainData');
+    new DataRequest(67328, 67942, 0, 0).open('GET', '/methods_pointedto_by_uievents.xml');
+    new DataRequest(67942, 3549818, 0, 0).open('GET', '/sharedassets0.assets');
+    new DataRequest(3549818, 5211578, 0, 0).open('GET', '/sharedassets0.resource');
+    new DataRequest(5211578, 5761158, 0, 0).open('GET', '/sharedassets1.assets');
+    new DataRequest(5761158, 8009215, 0, 0).open('GET', '/sharedassets1.resource');
+    new DataRequest(8009215, 8013539, 0, 0).open('GET', '/sharedassets2.assets');
+    new DataRequest(8013539, 8017839, 0, 0).open('GET', '/sharedassets3.assets');
+    new DataRequest(8017839, 9578211, 0, 0).open('GET', '/Resources/unity_default_resources');
+    new DataRequest(9578211, 10092319, 0, 0).open('GET', '/Resources/unity_builtin_extra');
 
     function processPackageData(arrayBuffer) {
       Module.finishedDataFileDownloads++;
