@@ -1,15 +1,15 @@
 <link rel="import" href="../imports.html">
 <dom-module id="blog-preview">
     <template>
-        <paper-material class="content" on-click="tap">
-            <div class="content">
-                <img src="{{image}}" alt="{{title}}" class="crop content"/>
-                <br/>
-                <h2 class="content inline">{{title}}</h2>
-                <p class="content inline">{{date}}</p>
-                <p class="content">{{summary}}</p>
+        <paper-card heading="{{title}}" image="{{image}}">
+            <div class="card-content">
+                <p>{{date}}</p>
+                <p id="description">{{summary}}</p>
             </div>
-        </paper-material>
+            <div class="card-actions">
+                <paper-button raised on-click="tap(null, null, null)">More...</paper-button>
+            </div>
+        </paper-card>
     </template>
     
     <script>
