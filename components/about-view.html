@@ -1,0 +1,24 @@
+<dom-module id="about-view">
+    <template>
+        <h1>About Me</h1>
+        <p id="bio-body">This is still under construction.  I will be adding a bio here eventually.</p>
+    </template>
+    
+    <script>
+        Polymer({
+            is: "about-view",
+            proerties: {
+                small_view: { type: Boolean, value: false },
+                small_bio: {
+                    type: String, 
+                    value: "This is my small bio, a much more condensed and quickly readable version of my about page"
+                }
+            },
+            ready: function(){
+                if (this.small_view){
+                    $("#bio-body").innerHTML = this.small_bio;
+                }
+            }
+        });
+    </script>
+</dom-module>

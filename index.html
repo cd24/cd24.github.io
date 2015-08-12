@@ -1,77 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>John McAvey</title>
-  <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-  <link rel="import" href="vulcanized.html">
-  <link rel="stylesheet" href="styles.css" shim-shadowdom>
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-  <link rel="icon" href="favicon.ico" type="image/ico" />
-  <base target="_blank"></base>
-  <style>
-    core-animated-pages > *  {
-      font-size: inherit;
-      overflow-y: auto;
-      padding: 30px;
-    }
-  </style>
-</head>
-<body unresolved fullbleed>
+    <head>
+        
+        <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+        <script src="jquery-1.11.3.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="import" href="bower_components/more-routing/more-routing.html">
+        <title>John McAvey</title>
 
-<template is="auto-binding" id="t">
+        <more-routing-config driver="hash"></more-routing-config>
+        <more-route name="home" path="/"></more-route>
+        <more-route name="about" path="/about"></more-route>
+        <more-route name="blog" path="/blog">
+            <more-route name="post" path="/:postID"></more-route>
+        </more-route>
+        <more-route name="contact" path="/contact"></more-route>
+        <more-route name="projects" path="/projects"></more-route>
+        
+        <link rel="import" href="imports.html">
 
-  <!-- Route controller. -->
-  <flatiron-director route="{{route}}" autoHash></flatiron-director>
+    </head>
+    <body fullbleed vertical layout unresolved>
+        <template is="dom-bind">
+            <paper-drawer-panel id="drawerPanel">
+                <paper-header-panel drawer id="drawer">
+                    <paper-toolbar id="drawerToolbar">
+                        <span>Navigation</span>
+                    </paper-toolbar>
 
-  <!-- Keyboard nav controller. -->
-  <core-a11y-keys id="keys" target="{{parentElement}}"
-                  keys="up down left right space space+shift"
-                  on-keys-pressed="{{keyHandler}}"></core-a11y-keys>
+                    <more-route-selector>
+                        <paper-menu class="list" selected="0" on-iron-select="_drawerSelect">
+                            <paper-item route="home">Home</paper-item>
+                            <paper-item route="projects">Projects</paper-item>
+                            <paper-item route="blog">Blog</paper-item>
+                            <paper-item route="about">About</paper-item>
+                            <paper-item route="contact">Contact</paper-item>
+                        </paper-menu>
+                    </more-route-selector>
+                </paper-header-panel>
 
-  <!-- Dynamic content controller -->
-  <core-ajax id="ajax" url="{{selectedPage.page.url}}" handleAs="document"
-             on-core-response="{{onResponse}}"></core-ajax>
-
-  <core-scaffold id="scaffold">
-
-    <nav>
-      <core-toolbar>
-        <span>Navigation</span>
-      </core-toolbar>
-      <core-menu id="menu" valueattr="hash"
-                 selected="{{route}}"
-                 selectedModel="{{selectedPage}}"
-                 on-core-select="{{menuItemSelected}}" on-click="{{ajaxLoad}}">
-        <template repeat="{{page, i in pages}}">
-          <paper-item hash="{{page.hash}}" noink>
-            <core-icon icon="label{{route != page.hash ? '-outline' : ''}}"></core-icon>
-            <a href="{{page.url}}">{{page.name}}</a>
-          </paper-item>
+                <paper-header-panel main>
+                    <paper-toolbar id="contentToolbar">
+                        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+                        <more-route-selector>
+                            <iron-pages>
+                                <paper-item route="home">Home</paper-item>
+                                <paper-item route="blog">Bloggings</paper-item>
+                                <paper-item route="about">About Me</paper-item>
+                                <paper-item route="contact">Contact</paper-item>
+                                <paper-item route="projects">Projects</paper-item>
+                            </iron-pages>
+                        </more-route-selector>
+                    </paper-toolbar>
+                    <div class="content">
+                        <more-route-selector selectedParams="{{params}}">
+                            <iron-pages>
+                                <blog-posts route="blog"></blog-posts>
+                                <about-view route="about"></about-view>
+                                <home-view route="home"></home-view>
+                                <contact-view route="contact"></contact-view>
+                                <projects-view route="projects"></projects-view>
+                                <post-view></post-view>
+                            </iron-pages>
+                        </more-route-selector>
+                    </div>
+                    
+                </paper-header-panel>
+            </paper-drawer-panel>
         </template>
-      </core-menu>
-    </nav>
-
-    <core-toolbar tool flex>
-      <div flex>{{selectedPage.page.name}}</div>
-    </core-toolbar>
-
-    <div layout horizontal top-center fit>
-      <core-animated-pages id="pages" selected="{{route}}" valueattr="hash"
-                           transitions="slide-from-right">
-        <template repeat="{{page, i in pages}}">
-          <section hash="{{page.hash}}" layout vertical top-center>
-            <div style="max-width:100%;">Loading...</div>
-          </section>
-        </template>
-      </core-animated-pages>
-    </div>
-
-  </core-scaffold>
-
-</template>
-
-<script src="app-ajax.js"></script>
-</body>
+        <script>
+            params = [];
+            
+            var scope = document.querySelector('template[is="dom-bind"]');
+            scope._drawerSelect = function(){
+                var drawer = $("#drawer");
+                if (drawer.narow){
+                    drawer.closeDrawer();
+                }
+            }
+        </script>
+    </body>
 </html>

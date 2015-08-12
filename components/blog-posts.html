@@ -1,0 +1,58 @@
+<link rel="import" href="blog-preview.html">
+<dom-module id="blog-posts">
+    <template>
+        <template is="dom-repeat" items="{{posts}}">
+            <blog-preview post="{{item}}"></blog-preview>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: "blog-posts",
+            properties: {
+                posts: {type: Array, notify: true, value: [] },
+                num_posts: { type: Number, value: 0, notify: true },
+                source: {type: String, value: "http://" + document.domain + ":8080"}
+            },
+            getPosts: function(){
+                //return test data... ideally this is a temporary thing.
+                var post_count = this.getPostCount();
+                console.log("post_count: " + post_count);
+                for (var i = 1; i <= post_count; ++i){
+                    $.ajax({
+                        context: this,
+                        type: "GET",
+                        url: this.source + "?type=single&postID=" + i,
+                        dataType: "json",
+                        headers: {
+                            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+                        }
+                    }).done(function(data){
+                        console.log("Recieved data: " + data.title + ", " + data.image);
+                        this.push("posts", data);
+                    });
+                } 
+            },
+            ready: function(){
+                //fetch data, in this case... it's sample data.
+                console.log("Prepping posts");
+                this.getPosts();
+            },
+            getPostCount: function(){
+                $.ajax({
+                    context: this,
+                    async: false,
+                    type: "GET",
+                    url: this.source + "?type=count",
+                    dataType: "json",
+                    headers: {
+                        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+                    }
+                }).done(function(data){
+                    console.log("updating num posts to: " + data.count);
+                    this.set("num_posts", data.count);
+                });
+                return this.num_posts;
+            }
+        });
+    </script>
+</dom-module>

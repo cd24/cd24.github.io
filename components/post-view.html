@@ -1,0 +1,18 @@
+<dom-module id="post-view">
+    <template>
+        <more-route path="/blog/:userID" params="{{params}}" context></more-route>
+        <p>Post View!</p>
+        <p>Recieved param: </p> 
+        <p>{{params.userID}}</p>
+    </template>
+    <script>
+        Polymer({
+            is: "post-view",
+            properties: {
+            },
+            ready: function(){
+                console.log("param.userid: "+ params.userID);
+            }
+        });
+    </script>
+</dom-module>

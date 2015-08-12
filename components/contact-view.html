@@ -1,0 +1,24 @@
+<dom-module id="contact-view">
+    <template>
+        <p>Just so you know, this doesn't do anything yet.  I am working on establishing a place where I can effectively ignore your feedback :)</p>
+        <paper-material class="content">
+            <paper-input label="Name" class="content">
+                <paper-icon-button suffix icon="clear"></paper-icon-button>
+            </paper-input>
+            <paper-input label="Contact Email" class="content"></paper-input>
+            <paper-input label="Message" class="content"></paper-input>
+            <paper-button raised class="content">Send Message!</paper-button>
+        </paper-material>
+        
+    </template>
+    <script>
+        Polymer({
+            is: "contact-view",
+            properties: {
+                email: String,
+                name: String,
+                message: String
+            }
+        });
+    </script>
+</dom-module>

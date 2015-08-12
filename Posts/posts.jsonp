@@ -1,0 +1,19 @@
+[
+{
+    img: "../images/post-headers/post_1.png",
+    title: "This is a test post!",
+    date: "7-5-2015",
+    id: 2,
+    summary: "This is a post summary that has been read in from a file.",
+    body: "This is a posts body that has been read in from a file.  This is going to end up being the majority of the post screen and will ultimately contain formatting"
+},
+{
+    img: "../images/post-headers/post_1.png",
+    title: "This is a second test post!",
+    date: "7-4-2015",
+    id: 1,
+    summary: "This is a secon post that has been read in from a file.",
+    body: "This is a much shorter body because I'm tired of writing test data!"
+}
+
+]
