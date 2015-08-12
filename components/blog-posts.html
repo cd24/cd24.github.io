@@ -58,7 +58,8 @@
                     dataType: "json",
                     headers: {
                         'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
-                    }
+                    },
+                    timeout: 1000
                 }).done(function(data){
                     console.log("updating num posts to: " + data.count);
                     this.set("num_posts", data.count);
