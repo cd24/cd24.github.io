@@ -35,7 +35,6 @@
     "commit": "ba1807e1698ef901c104c8908318e887dd049fff"
   },
   "_source": "git://github.com/GoogleWebComponents/google-calendar.git",
-  "_target": "^1.0.0",
-  "_originalSource": "GoogleWebComponents/google-calendar",
-  "_direct": true
+  "_target": "~1.0.1",
+  "_originalSource": "GoogleWebComponents/google-calendar"
 }
