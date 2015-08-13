@@ -7,7 +7,7 @@
                 <p id="description">{{summary}}</p>
             </div>
             <div class="card-actions">
-                <paper-button raised on-click="tap(null, null, null)">More...</paper-button>
+                <paper-button raised on-click="tap">More...</paper-button>
             </div>
         </paper-card>
     </template>
@@ -21,22 +21,24 @@
                 title: String,
                 date: String,
                 post: Object,
-                id: Number
+                id: Number,
+                selected: {type: Number, notify: true},
+                tracker: Number
             },
             ready: function(){
                 if (this.post != null){
-                    console.log("digesting post: " + this.post);
                     this.image = this.post.image;
                     this.title = this.post.title;
                     this.summary = this.post.summary;
                     this.date = this.post.date;
                     this.id = this.post.id;
                 }
-                console.log("Post ready: " + this.title + ", \n" + this.date + ", \n" + this.image + ", \n" + this.summary);
             },
             tap: function(event, detail, sender){
-                console.log("clicked post: " + this.title);
-                window.location.replace(MoreRouting.urlFor("post", {postID: this.id}));
+                var location = MoreRouting.urlFor("blog-post", {postID: this.id});
+                console.log("Tracker: " + this.tracker);
+                console.log("Redirecting to post at address: " + location);
+                window.location.href = location;
             }
         });
     </script>

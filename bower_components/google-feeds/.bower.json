@@ -30,6 +30,5 @@
   },
   "_source": "git://github.com/GoogleWebComponents/google-feeds.git",
   "_target": "^1.0.0",
-  "_originalSource": "GoogleWebComponents/google-feeds",
-  "_direct": true
+  "_originalSource": "GoogleWebComponents/google-feeds"
 }

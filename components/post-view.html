@@ -1,18 +1,63 @@
 <dom-module id="post-view">
     <template>
-        <more-route path="/blog/:userID" params="{{params}}" context></more-route>
-        <p>Post View!</p>
-        <p>Recieved param: </p> 
-        <p>{{params.userID}}</p>
+        <more-route path="/blog/:postID" params="{{params}}" context></more-route>
+        <img src="{{post.image}}" height=10% width="100%" />
+        <h1>{{post.title}}</h1>
+        <h3 class="inline">John McAvey</h3><br/>
+        <h3 class="inline">{{post.date}}</h3><br/>
+        <p>{{post.body}}</p>
     </template>
     <script>
         Polymer({
             is: "post-view",
             properties: {
-                post: Object
+                params: {type: Object,observer: "digestPostID"},
+                post: Object,
+                source: {type: String, value: "http://" + document.domain + ":8080"}
             },
             ready: function(){
-                console.log("param.userid: "+ params.userID);
+                this.getPost();
+                console.log("Post view opened with ID: " + this.params.postID + " and source: " + this.source);
+            },
+            attached: function(){
+                console.log("post attached");
+            },
+            detached: function(){
+                console.log("post detatched");
+            },
+            attributeChanged: function(name, old, newVal){
+                console.log(this.localName +":" + name + " changed from '" + old + "' to '" + newVal + "'");
+                if (name === "postID" || (name === "class" && newVal === "iron-selected")){
+                    console.log("updating post");
+                    this.post = null;
+                    this.getPost();
+                }
+            },
+            digestPostID: function() {
+                console.log("Current Post ID: " + this.params.postID + ", new post ID: " + this.params.postID);
+                //this.set("postID", this.params.postID);
+                //this.getPost();
+            },
+            getPost: function(){
+                console.log("this.postID: " + JSON.stringify(this.params.postID));
+                console.log("this.source: " + this.source);
+                
+                if (this.source && this.params.postID){
+                    console.log("Request: " + this.source + "?type=single&postID=" + this.postID);
+                    $.ajax({
+                        context: this,
+                        type: "GET",
+                        url: this.source + "?type=single&postID=" + this.params.postID,
+                        dataType: "json",
+                        headers: {
+                            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+                        },
+                        timeout: 500
+                    }).done(function(data){
+                        this.set("post", data);
+                        console.log("retrieved post: " + JSON.stringify(this.post));
+                    });
+                }
             }
         });
     </script>

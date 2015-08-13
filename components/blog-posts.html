@@ -2,8 +2,10 @@
 <dom-module id="blog-posts">
     <template>
         <template is="dom-repeat" items="{{posts}}">
-            <blog-preview post="{{item}}"></blog-preview>
+            <blog-preview post="{{item}}" selected="{{selected}}" tacker="{{tracker}}"></blog-preview>
         </template>
+        </more-route-selector>
+        
     </template>
     <script>
         Polymer({
@@ -11,12 +13,18 @@
             properties: {
                 posts: {type: Array, notify: true, value: [] },
                 num_posts: { type: Number, value: 0, notify: true },
-                source: {type: String, value: "http://" + document.domain + ":8080"}
+                source: {type: String, value: "http://" + document.domain + ":8080"},
+                selected: { type: Number, value: 0, notify: true }
+            },
+            selectPost: function(){
+                if (this.posts)
+                    return this.posts[this.selected];
+                else
+                    return 0;
             },
             getPosts: function(){
                 //return test data... ideally this is a temporary thing.
                 var post_count = this.getPostCount();
-                console.log("post_count: " + post_count);
                 for (var i = 1; i <= post_count; ++i){
                     $.ajax({
                         context: this,
@@ -28,16 +36,17 @@
                         },
                         timeout: 500
                     }).done(function(data){
-                        console.log("Recieved data: " + data.title + ", " + data.image);
                         this.push("posts", data);
                     });
                 } 
             },
+            attributeChanged: function(attrName , oldVal, newVal){
+                console.log(attrName + " Changed from " + oldVal + ", to " + newVal);
+            },
             ready: function(){
                 //fetch data, in this case... it's sample data.
-                console.log("Prepping posts");
                 //this.getPosts(); //Commented out so the page will load faster than the 6 seconds it takes to default on the ajax requests
-                
+                this.getPosts();
                 //this is here for the time while I get a backend setup
                 if (this.num_posts == 0){
                     var data = {
@@ -61,12 +70,15 @@
                     headers: {
                         'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
                     },
-                    timeout: 500
+                    timeout: 500,
+                    tracker: Number
                 }).done(function(data){
-                    console.log("updating num posts to: " + data.count);
                     this.set("num_posts", data.count);
                 });
                 return this.num_posts;
+            },
+            json_string: function(){
+                return JSON.stringify(this.params);
             }
         });
     </script>

@@ -8,20 +8,8 @@
         <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="import" href="bower_components/more-routing/more-routing.html">
-        <title>John McAvey</title>
-
-        <more-routing-config driver="hash"></more-routing-config>
-        <more-route name="home" path="/"></more-route>
-        <more-route name="about" path="/about"></more-route>
-        <more-route name="blog" path="/blog">
-            <more-route name="post" path="/:postID"></more-route>
-        </more-route>
-        <more-route name="contact" path="/contact"></more-route>
-        <more-route name="projects" path="/projects"></more-route>
-        
         <link rel="import" href="imports.html">
-
+        <title>John McAvey</title>
     </head>
     <body fullbleed vertical layout unresolved>
         <template is="dom-bind">
@@ -57,13 +45,13 @@
                     </paper-toolbar>
                     <div class="content">
                         <more-route-selector selectedParams="{{params}}">
-                            <iron-pages>
-                                <blog-posts route="blog"></blog-posts>
+                            <iron-pages id="content_pages">
+                                <post-view postID="{{params.postID}}"></post-view>
+                                <blog-posts route="blog" tracker="{{tracker}}"></blog-posts>
                                 <about-view route="about"></about-view>
                                 <home-view route="home"></home-view>
                                 <contact-view route="contact"></contact-view>
                                 <projects-view route="projects"></projects-view>
-                                <post-view></post-view>
                             </iron-pages>
                         </more-route-selector>
                     </div>
@@ -72,15 +60,20 @@
             </paper-drawer-panel>
         </template>
         <script>
-            params = [];
-            
             var scope = document.querySelector('template[is="dom-bind"]');
+            if (!scope.params){
+                console.log("setting params");
+                scope.params = {}
+            }
             scope._drawerSelect = function(){
                 var drawer = $("#drawer");
                 if (drawer.narow){
                     drawer.closeDrawer();
                 }
-            }
+            };
+            scope.json_string = function(obj){
+                return JSON.stringify(obj);
+            };
         </script>
     </body>
 </html>

@@ -32,6 +32,5 @@
   },
   "_source": "git://github.com/GoogleWebComponents/google-castable-video.git",
   "_target": "~1.0.1",
-  "_originalSource": "GoogleWebComponents/google-castable-video",
-  "_direct": true
+  "_originalSource": "GoogleWebComponents/google-castable-video"
 }

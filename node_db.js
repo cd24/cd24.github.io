@@ -45,7 +45,7 @@ var finalize = function(data, res, req){
                            'Access-Control-Allow-Methods' : 'GET',
                             'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'});
         res.end(JSON.stringify(data));
-}
+};
 
 var count_posts = function(res, req){
     db.serialize(function(){
@@ -54,7 +54,7 @@ var count_posts = function(res, req){
             finalize(data, res, req);
         });
     });
-}
+};
 
 var get_post = function(entry_num, res, req){
 	console.log("Retrieving post: " + entry_num);
