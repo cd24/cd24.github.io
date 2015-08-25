@@ -1,11 +1,19 @@
 <dom-module id="post-view">
     <template>
         <more-route path="/blog/:postID" params="{{params}}" context></more-route>
-        <img src="{{post.image}}" height=10% width="100%" />
-        <h1>{{post.title}}</h1>
-        <h3 class="inline">John McAvey</h3><br/>
-        <h3 class="inline">{{post.date}}</h3><br/>
-        <p>{{post.body}}</p>
+        <iron-pages selected="{{selected}}">
+            <section>
+                <img src="{{post.image}}" height=10% width="100%" />
+                <h1>{{post.title}}</h1>
+                <h3 class="inline">{{post.author}}</h3><br/>
+                <h3 class="inline">{{post.date}}</h3><br/>
+                <p>{{post.body}}</p>
+            </section>
+            <section>
+                <h2>WOAH!!  There is nothing here!</h4>
+                <p>Sorry, the post (<b>{{params.postID}}</b>) is not one that we know of!  It might have been taken down or the server may just be having problems right now.</p>
+            </section>
+        </iron-pages>
     </template>
     <script>
         Polymer({
@@ -13,7 +21,7 @@
             properties: {
                 params: {type: Object,observer: "digestPostID"},
                 post: Object,
-                source: {type: String, value: "http://" + document.domain + ":8080"}
+                source: {type: String, notify: true}
             },
             ready: function(){
                 this.getPost();
@@ -52,12 +60,19 @@
                         headers: {
                             'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
                         },
+                        error: function(jqXHR, status, error){
+                            this.selected = 1;
+                        },
                         timeout: 500
                     }).done(function(data){
                         this.set("post", data);
+                        this.selected = 0;
                         console.log("retrieved post: " + JSON.stringify(this.post));
                     });
                 }
+            },
+            print_value: function(){
+                console.log("Params at button push: " + JSON.stringify(this.params));
             }
         });
     </script>

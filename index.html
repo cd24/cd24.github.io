@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
-        <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-        <script src="jquery-1.11.3.min.js"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        
+        <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+        <script src="jquery-1.11.3.min.js"></script>
         <link rel="import" href="imports.html">
         <title>John McAvey</title>
     </head>
@@ -46,8 +46,8 @@
                     <div class="content">
                         <more-route-selector selectedParams="{{params}}">
                             <iron-pages id="content_pages">
-                                <post-view postID="{{params.postID}}"></post-view>
-                                <blog-posts route="blog" tracker="{{tracker}}"></blog-posts>
+                                <post-view postID="{{params.postID}}" source="{{get_data_source()}}"></post-view>
+                                <blog-posts route="blog" source="{{get_data_source()}}"></blog-posts>
                                 <about-view route="about"></about-view>
                                 <home-view route="home"></home-view>
                                 <contact-view route="contact"></contact-view>
@@ -73,6 +73,9 @@
             };
             scope.json_string = function(obj){
                 return JSON.stringify(obj);
+            };
+            scope.get_data_source = function(){
+                return "http://" + document.domain + ":8080";
             };
         </script>
     </body>

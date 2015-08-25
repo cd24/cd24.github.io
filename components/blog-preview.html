@@ -1,13 +1,12 @@
-<link rel="import" href="../imports.html">
 <dom-module id="blog-preview">
     <template>
-        <paper-card heading="{{title}}" image="{{image}}">
+        <paper-card heading="{{title}}" image="{{image}}" class="content">
             <div class="card-content">
                 <p>{{date}}</p>
                 <p id="description">{{summary}}</p>
             </div>
             <div class="card-actions">
-                <paper-button raised on-click="tap">More...</paper-button>
+                <a href="{{details}}"><paper-button raised>More...</paper-button></a>
             </div>
         </paper-card>
     </template>
@@ -22,8 +21,8 @@
                 date: String,
                 post: Object,
                 id: Number,
-                selected: {type: Number, notify: true},
-                tracker: Number
+                selected: Object,
+                details: String
             },
             ready: function(){
                 if (this.post != null){
@@ -33,10 +32,11 @@
                     this.date = this.post.date;
                     this.id = this.post.id;
                 }
+                
+                this.details = MoreRouting.urlFor("blog-post", {postID: this.id});
             },
             tap: function(event, detail, sender){
                 var location = MoreRouting.urlFor("blog-post", {postID: this.id});
-                console.log("Tracker: " + this.tracker);
                 console.log("Redirecting to post at address: " + location);
                 window.location.href = location;
             }

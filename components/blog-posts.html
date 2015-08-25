@@ -1,11 +1,9 @@
-<link rel="import" href="blog-preview.html">
 <dom-module id="blog-posts">
     <template>
         <template is="dom-repeat" items="{{posts}}">
-            <blog-preview post="{{item}}" selected="{{selected}}" tacker="{{tracker}}"></blog-preview>
+            <blog-preview post="{{item}}" selected="{{selected}}"></blog-preview>
         </template>
         </more-route-selector>
-        
     </template>
     <script>
         Polymer({
@@ -13,18 +11,41 @@
             properties: {
                 posts: {type: Array, notify: true, value: [] },
                 num_posts: { type: Number, value: 0, notify: true },
-                source: {type: String, value: "http://" + document.domain + ":8080"},
-                selected: { type: Number, value: 0, notify: true }
+                source: {type: String,notify: true}
             },
-            selectPost: function(){
-                if (this.posts)
-                    return this.posts[this.selected];
+            ready: function(){
+                //fetch data, in this case... it's sample data.
+                //this.getPosts(); //Commented out so the page will load faster than the 6 seconds it takes to default on the ajax requests
+                console.log("blog-posts source: " + this.source);
+                if (this.source)
+                    this.getPostCount();
                 else
-                    return 0;
+                    console.log("source had a problem: " + this.source);
+                //this is here for the time while I get a backend setup
+                if (this.num_posts == 0){
+                    var data = {
+                        title: "This is filler!",
+                        date: "DATE",
+                        summary: "I am still working on finding some spare equipment to run the back end on.  Sorry for the inconvinience.",
+                        body: "It's quite sad when a developer cannot find hardware to run their code on.  I will remedy this shortly.  In the meantime, please enjoy the rest of the site.  Most of it works, even if it's test data!",
+                        image: "../images/post-headers/post_1.png",
+                        id: 1
+                    }
+                    this.push("posts", data);
+                    var dat = {
+                        title: "This is a second filler!",
+                        date: "DATE",
+                        summary: "I am still working on finding some spare equipment to run the back end on.  Sorry for the inconvinience.",
+                        body: "It's quite sad when a developer cannot find hardware to run their code on.  I will remedy this shortly.  In the meantime, please enjoy the rest of the site.  Most of it works, even if it's test data!",
+                        image: "../images/post-headers/post_1.png",
+                        id: 2
+                    }
+                    this.push("posts", dat);
+                }
             },
             getPosts: function(){
                 //return test data... ideally this is a temporary thing.
-                var post_count = this.getPostCount();
+                console.log("Blog-Posts source before post_get: " + this.source);
                 for (var i = 1; i <= post_count; ++i){
                     $.ajax({
                         context: this,
@@ -40,30 +61,10 @@
                     });
                 } 
             },
-            attributeChanged: function(attrName , oldVal, newVal){
-                console.log(attrName + " Changed from " + oldVal + ", to " + newVal);
-            },
-            ready: function(){
-                //fetch data, in this case... it's sample data.
-                //this.getPosts(); //Commented out so the page will load faster than the 6 seconds it takes to default on the ajax requests
-                this.getPosts();
-                //this is here for the time while I get a backend setup
-                if (this.num_posts == 0){
-                    var data = {
-                        title: "This is filler!",
-                        date: "DATE",
-                        summary: "I am still working on finding some spare equipment to run the back end on.  Sorry for the inconvinience.",
-                        body: "It's quite sad when a developer cannot find hardware to run their code on.  I will remedy this shortly.  In the meantime, please enjoy the rest of the site.  Most of it works, even if it's test data!",
-                        image: "../images/post-headers/post_1.png",
-                        id: 10
-                    }
-                    this.push("posts", data);
-                }
-            },
             getPostCount: function(){
+                console.log("Blog-Posts source before count: " + this.source);
                 $.ajax({
                     context: this,
-                    async: false,
                     type: "GET",
                     url: this.source + "?type=count",
                     dataType: "json",
@@ -74,11 +75,8 @@
                     tracker: Number
                 }).done(function(data){
                     this.set("num_posts", data.count);
-                });
-                return this.num_posts;
-            },
-            json_string: function(){
-                return JSON.stringify(this.params);
+                    this.getPosts();
+                })
             }
         });
     </script>

@@ -1,0 +1,32 @@
+<dom-module id="post-modal">
+    <template>
+        <paper-dialog id="postview">
+            <paper-card image="{{post.image}}">
+                <h2>{{post.title}}</h2>
+                <h3 class="inline">{{post.author}}</h3><h3 class="inline">{{post.date}}</h3>
+            </paper-card>
+        </paper-dialog>
+        <paper-dialog-scrollable>
+            <p>{{post.body}}</p>
+            <paper-button dialog-dismiss>Close</paper-button>
+        </paper-dialog-scrollable>
+    </template>
+    <script>
+        Polymer({
+            is: "post-modal",
+            properties: {
+                post: {type: Object, observer: "updatePost"},
+                show: {type: Boolean, observer: "openModal", value: false}
+            },
+            updatePost: function(){
+                console.log("Updating post to: " + JSON.stringify(this.post));
+            },
+            openModal: function(){
+                if (this.show)
+                    this.$.postview.open();
+                else
+                    this.$.postview.close();
+            }
+        });
+    </script>
+</dom-module>
