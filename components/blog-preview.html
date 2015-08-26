@@ -36,9 +36,7 @@
                 this.details = MoreRouting.urlFor("blog-post", {postID: this.id});
             },
             tap: function(event, detail, sender){
-                var location = MoreRouting.urlFor("blog-post", {postID: this.id});
-                console.log("Redirecting to post at address: " + location);
-                window.location.href = location;
+                window.location.href = this.details;
             }
         });
     </script>
