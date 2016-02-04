@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        
+        <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+        <script src="jquery-1.11.3.min.js"></script>
+        <link rel="import" href="imports.html">
+        <title>John McAvey</title>
+    </head>
+    <body fullbleed vertical layout unresolved>
+        <template is="dom-bind">
+            <paper-drawer-panel id="drawerPanel">
+                <paper-header-panel drawer id="drawer">
+                    <paper-toolbar id="drawerToolbar">
+                        <span>Navigation</span>
+                    </paper-toolbar>
+
+                    <more-route-selector>
+                        <paper-menu class="list" selected="0" on-iron-select="_drawerSelect">
+                            <paper-item route="home">Home</paper-item>
+                            <paper-item route="projects">Projects</paper-item>
+                            <paper-item route="blog">Blog</paper-item>
+                            <paper-item route="resume">Resume</paper-item>
+                            <paper-item route="about">About</paper-item>
+                            <paper-item route="contact">Contact</paper-item>
+                        </paper-menu>
+                    </more-route-selector>
+                </paper-header-panel>
+
+                <paper-header-panel main>
+                    <paper-toolbar id="contentToolbar">
+                        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+                        <more-route-selector>
+                            <iron-pages>
+                                <paper-item route="home">Home</paper-item>
+                                <paper-item route="blog">Bloggings</paper-item>
+                                <paper-item route="about">About Me</paper-item>
+                                <paper-item route="resume">Resume</paper-item>
+                                <paper-item route="contact">Contact</paper-item>
+                                <paper-item route="projects">Projects</paper-item>
+                            </iron-pages>
+                        </more-route-selector>
+                    </paper-toolbar>
+                    <div class="content">
+                        <more-route-selector selectedParams="{{params}}">
+                            <iron-pages id="content_pages">
+                                <post-view postID="{{params.postID}}" source="{{get_data_source()}}"></post-view>
+                                <blog-posts route="blog" source="{{get_data_source()}}"></blog-posts>
+                                <about-view route="about"></about-view>
+                                <home-view route="home"></home-view>
+                                <contact-view route="contact"></contact-view>
+                                <projects-view route="projects"></projects-view>
+                                <resume-view route="resume"></resume-view>
+                            </iron-pages>
+                        </more-route-selector>
+                    </div>
+                    
+                </paper-header-panel>
+            </paper-drawer-panel>
+        </template>
+        <script>
+            var scope = document.querySelector('template[is="dom-bind"]');
+            if (!scope.params){
+                console.log("setting params");
+                scope.params = {}
+            }
+            scope._drawerSelect = function(){
+                var drawer = $("#drawer");
+                if (drawer.narow){
+                    drawer.closeDrawer();
+                }
+            };
+            scope.json_string = function(obj){
+                return JSON.stringify(obj);
+            };
+            scope.get_data_source = function(){
+                return "http://" + document.domain + ":8080";
+            };
+        </script>
+    </body>
+</html>

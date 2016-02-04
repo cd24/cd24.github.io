@@ -1,0 +1,40 @@
+<dom-module id="resume-view">
+    <template>
+        <paper-card style="margin: 10px;">
+            <div class="card-content" id="content" name="content">
+            </div>
+            <div class="card-actions">
+                <paper-button on-click="download">Download</paper-button>
+                <paper-button on-click="refresh">Refresh</paper-button>
+            </div>
+        </paper-card>
+        <div id="testDiv"></div>
+    </template>
+    <script>
+        Polymer({
+            is: "resume-view",
+            properties: {
+            },
+            attached: function(){
+                var resume = "../resume.html"
+                console.log("loading resume at: " + resume)
+                $("#content").load(resume, function(response, message, xhr){
+                    $("#content").innerHTML = response;
+                    console.log("Response: " + response);
+                    console.log("Message: " + xhr.status);
+                });
+            },
+            download: function(){
+                location.href = "../resume.pdf"
+            },
+            refresh: function(){
+                var resume = "../resume.html"
+                $("#content").load(resume, function(response, message, xhr){
+                    $("#content").innerHTML = response;
+                    console.log("Response: " + response);
+                    console.log("Message: " + xhr.status);
+                });
+            }
+        })
+    </script>
+</dom-module>

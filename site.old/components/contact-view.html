@@ -1,0 +1,28 @@
+<dom-module id="contact-view">
+    <template>
+        <p>This portion of the site is still under construction.  Feedback sent through this form will not reach me (for now).</p>
+        <paper-material class="content">
+            <paper-input label="Name" class="content" value="{{name}}">
+                <paper-icon-button suffix icon="clear"></paper-icon-button>
+            </paper-input>
+            <paper-input label="Contact Email" class="content" value="{{email}}"></paper-input>
+            <paper-input label="Message" class="content" value="{{message}}"></paper-input>
+            <paper-button raised class="content">Send Message!</paper-button>
+        </paper-material>
+        
+    </template>
+    <script>
+        Polymer({
+            is: "contact-view",
+            properties: {
+                email: String,
+                name: String,
+                message: String
+            },
+            submit_feedback: function(){
+                console.log("Submitted");
+                alert("Thanks for your feed back!");
+            }
+        });
+    </script>
+</dom-module>

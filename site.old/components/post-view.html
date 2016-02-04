@@ -1,0 +1,79 @@
+<dom-module id="post-view">
+    <template>
+        <more-route path="/blog/:postID" params="{{params}}" context></more-route>
+        <iron-pages selected="{{selected}}">
+            <section>
+                <img src="{{post.image}}" height=10% width="100%" />
+                <h1>{{post.title}}</h1>
+                <h3 class="inline">{{post.author}}</h3><br/>
+                <h3 class="inline">{{post.date}}</h3><br/>
+                <p>{{post.body}}</p>
+            </section>
+            <section>
+                <h2>WOAH!!  There is nothing here!</h4>
+                <p>Sorry, the post (<b>{{params.postID}}</b>) is not one that we know of!  It might have been taken down or the server may just be having problems right now.</p>
+            </section>
+        </iron-pages>
+    </template>
+    <script>
+        Polymer({
+            is: "post-view",
+            properties: {
+                params: {type: Object,observer: "digestPostID"},
+                post: Object,
+                source: {type: String, notify: true}
+            },
+            ready: function(){
+                this.getPost();
+                console.log("Post view opened with ID: " + this.params.postID + " and source: " + this.source);
+            },
+            attached: function(){
+                console.log("post attached");
+            },
+            detached: function(){
+                console.log("post detatched");
+            },
+            attributeChanged: function(name, old, newVal){
+                console.log(this.localName +":" + name + " changed from '" + old + "' to '" + newVal + "'");
+                if (name === "postID" || (name === "class" && newVal === "iron-selected")){
+                    console.log("updating post");
+                    this.post = null;
+                    this.getPost();
+                }
+            },
+            digestPostID: function() {
+                console.log("Current Post ID: " + this.params.postID + ", new post ID: " + this.params.postID);
+                //this.set("postID", this.params.postID);
+                //this.getPost();
+            },
+            getPost: function(){
+                console.log("this.postID: " + JSON.stringify(this.params.postID));
+                console.log("this.source: " + this.source);
+                
+                if (this.source && this.params.postID){
+                    console.log("Request: " + this.source + "?type=single&postID=" + this.postID);
+                    $.ajax({
+                        context: this,
+                        type: "GET",
+                        url: this.source + "?type=single&postID=" + this.params.postID,
+                        dataType: "json",
+                        headers: {
+                            'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+                        },
+                        error: function(jqXHR, status, error){
+                            this.selected = 1;
+                        },
+                        timeout: 500
+                    }).done(function(data){
+                        this.set("post", data);
+                        this.selected = 0;
+                        console.log("retrieved post: " + JSON.stringify(this.post));
+                    });
+                }
+            },
+            print_value: function(){
+                console.log("Params at button push: " + JSON.stringify(this.params));
+            }
+        });
+    </script>
+</dom-module>

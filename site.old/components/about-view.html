@@ -1,0 +1,28 @@
+<dom-module id="about-view">
+    <template>
+        <h1>About</h1>
+        <h3>Bio</h3>
+        <p>My name is John McAvey and I have been involved in Information Technology and Computer Science for the bulk of my life.  My interests in biology and computer science have provided me the oppertunity to continually grow as a life-long learner.  My work as an IT infrastructure techinitian has given me insight into how technology is being employed to revolutionize the workplace as well as how to quickly and effectively create minimalist functional environments.  This experience has helped me to develop intuitive user interfaces for applications I design.  In addition to my work at school, I enjoy physical activites such as basketball, and historical martial arts such as german longsword.</p>
+    
+        <h3>Work Experience</h3>
+        <p>For a complete list of my work experience please see my <a href="https://www.linkedin.com/in/johnmcavey">LinkedIn</a> page</p>
+    </template>
+    
+    <script>
+        Polymer({
+            is: "about-view",
+            proerties: {
+                small_view: { type: Boolean, value: false },
+                small_bio: {
+                    type: String, 
+                    value: "This is my small bio, a much more condensed and quickly readable version of my about page"
+                }
+            },
+            ready: function(){
+                if (this.small_view){
+                    $("#bio-body").innerHTML = this.small_bio;
+                }
+            }
+        });
+    </script>
+</dom-module>

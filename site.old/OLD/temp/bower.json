@@ -1,0 +1,30 @@
+{
+  "name": "cd24.github.io",
+  "version": "0.1.0",
+  "homepage": "jmcavey.me",
+  "authors": [
+    "John McAvey <john@mcavey.net>"
+  ],
+  "description": "Personal Website of John McAvey",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5",
+    "core-elements": "Polymer/core-elements#~0.5.5",
+    "core-toolbar": "Polymer/core-toolbar#~0.5.5",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.5",
+    "paper-progress": "Polymer/paper-progress#~0.5.5",
+    "platform": "Polymer/platform#~0.4.2",
+    "jquery": "~2.1.3"
+  }
+}

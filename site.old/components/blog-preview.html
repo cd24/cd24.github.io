@@ -1,0 +1,60 @@
+<dom-module id="blog-preview">
+    <template>
+        <paper-card heading="{{title}}" image="{{image}}" class="content">
+            <div class="card-content">
+                <p>{{date}}</p>
+                <p id="description">{{summary}}</p>
+            </div>
+            <div class="card-actions">
+                <a href="{{details}}"><paper-button raised>More...</paper-button></a>
+            </div>
+        </paper-card>
+    </template>
+    
+    <script>
+        Polymer({
+            is: 'blog-preview',
+            properties: {
+                image: {type: String, value: "test" },
+                summary: {type: String, value: "Summary"},
+                title: String,
+                date: String,
+                post: Object,
+                id: Number,
+                selected: Object,
+                details: String
+            },
+            ready: function(){
+                if (this.post != null){
+                    this.image = this.post.image;
+                    this.title = this.post.title;
+                    this.summary = this.post.summary;
+                    this.date = this.post.date;
+                    this.id = this.post.id;
+                }
+                
+                this.details = MoreRouting.urlFor("blog-post", {postID: this.id});
+            },
+            tap: function(event, detail, sender){
+                window.location.href = this.details;
+            }
+        });
+    </script>
+    <style>
+        .crop {
+            width: 50%;
+            height: 50%;
+            overflow: hidden;
+        }
+        .content {
+            margin: 10px;
+        }
+        .inline {
+            display: inline;
+        }
+        
+        a, a:visited, a:hover, a:active {
+            text-decoration: none;
+        }
+    </style>
+</dom-module>
