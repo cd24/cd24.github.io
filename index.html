@@ -107,12 +107,21 @@
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-                <h4 class="mdl-cell mdl-cell--12-col">Civet</h4>
-                <h7 class="mdl-cell mdl-cell--3-col">John McAvey</h7>
-                <h7 class="mdl-cell mdl-cell--3-col">Don Porter (SUNY)</h7>
-                <h7 class="mdl-cell mdl-cell--3-col">Chia-che Tsai (SUNY)</h7>
-                <h7 class="mdl-cell mdl-cell--3-col">Bhushan Jain (SUNY)</h7>
-                <br class="mdl-cell mdl-cell--12-col" />
+                <h4 class="mdl-cell mdl-cell--8-col">Civet</h4>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <p>Collaborated With</p>
+                    <ul>
+                        <li>
+                            Don Porter (SUNY)
+                        </li>
+                        <li>
+                            Chia-che Tsai (SUNY)
+                        </li>
+                        <li>
+                            Bhushan Jain (SUNY)
+                        </li>
+                    </ul>
+                </div>
                 <p class="mdl-cell mdl-cell--12-col">
                     Civet is a research project exploring the application of managed languages, such as the Java Virtual Machine, to Intel's <a href="https://software.intel.com/en-us/blogs/2013/09/26/protecting-application-secrets-with-intel-sgx">SGX</a> chip.  This project uses the Graphene library operating system to seperate secure and insecure Java execution and memory.  This project is still under construction, so the runtime code is currently unavailable.  However, the build tool is available to be viewed on github!
                 </p>
@@ -128,7 +137,6 @@
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h4 class="mdl-cell mdl-cell--12-col">Liftracker</h4>
-                <h7 class="mdl-cell mdl-cell--5-col">John McAvey</h7>
                 <br class="mdl-cell mdl-cell--12-col" \>
                 <p class="mdl-cell mdl-cell--8-col">
                     Liftracker is a simple iOS app designed to make weight training trackable.  This app is designed for people who want to track their weight training progress without having to worry with navigating all the extranious features of other applications.  Liftracker has simple analytical tools built in and aims to provide the user with the most effective experience possible.  Get the app out of your way, and get to training!
@@ -145,8 +153,35 @@
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--8-col">Cereal Killer</h4>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <p>Collaborated With</p>
+                    <ul>
+                        <li>
+                            Connor Bell
+                        </li>
+                        <li>
+                            JD Hoglan
+                        </li>
+                    </ul>
+                </div>
+                <br class="mdl-cell mdl-cell--12-col" \>
+                <p class="mdl-cell mdl-cell--8-col">
+                    Cereal Killer is a web tower defense game built in the Unity engine.  This game was designed using the unity editor and written in C#.  This project was written as a submission to the LudumDare competition.  The LudumDare competition is a weekend-long competition where game developers create a game in response to a theme.  This submission was in response to the theme "an unconventional weapon," in this case milk!  The game plays similarly to other tower defense games, showing the path the bowls will take in green and allowing users to place milk towers with different effects in a grid world to prevent them from reaching the end.
+                </br\>
+                </p>
+                <img style="height: 40%" class="mdl-cell mdl-cell--4-col" src="images/cerealkiller.png"/>
+              </div>
+              <div class="mdl-card__actions">
+                <a href="https://github.com/teirce/LudumDare32" class="mdl-button">Source</a>
+                <a href="Projects/CerealKiller/index.html" class="mdl-button">Play</a>
+              </div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h4 class="mdl-cell mdl-cell--12-col">Java SQLite Interface</h4>
-                <h7 class="mdl-cell mdl-cell--5-col">John McAvey</h7>
                 <br class="mdl-cell mdl-cell--12-col" \>
                 <p class="mdl-cell mdl-cell--8-col">
                     While working on a databases project in Hendrix's Scalable Software class, I began to notice I was writing SQL queries which were largely reptetive.  The natural solution: write a library to do it for me!  This project is designed to be a tool to allow developers using Java and SQLite to quickly write applications without having to manually manage tables.  Most notably, it posseses the ability to automatically save and query the database using user defined fields, generate tables automatically by reflecting over provided classes, and perform basic database maintenance without the developers intervention.  This project is still under development - next is automated migrations between database schemas!
@@ -162,7 +197,6 @@
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h4 class="mdl-cell mdl-cell--12-col">Logo Interpreter</h4>
-                <h7 class="mdl-cell mdl-cell--5-col">John McAvey</h7>
                 <br class="mdl-cell mdl-cell--12-col" \>
                 <p class="mdl-cell mdl-cell--8-col">
                     The Logo language is designed to direct a 'turtle' around the screen.  It allows users to specify instructions such as pen-up/down, left, right, forward, and backward.  In our scalable software class, we designed Logo interpreters using the Gramblr parsing engine.  This interpreter is a GUI for writing Logo code and interacting with the turtle.
@@ -175,36 +209,41 @@
               </div>
             </div>
           </section>
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
-            <div class="mdl-card mdl-cell mdl-cell--12-col">
-              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-                <h4 class="mdl-cell mdl-cell--12-col">Cereal Killer</h4>
-                <h7 class="mdl-cell mdl-cell--4-col">John McAvey</h7>
-                <h7 class="mdl-cell mdl-cell--4-col">Connor Bell (Hendrix College)</h7>
-                <h7 class="mdl-cell mdl-cell--4-col">JD Hoglan (Hendrix College)</h7>
-                <br class="mdl-cell mdl-cell--12-col" \>
-                <p class="mdl-cell mdl-cell--8-col">
-                    Cereal Killer is a web tower defense game built in the Unity engine.  This game was designed using the unity editor and written in C#.  This project was written as a submission to the LudumDare competition.  The LudumDare competition is a weekend-long competition where game developers create a game in response to a theme.  This submission was in response to the theme "an unconventional weapon," in this case milk!  The game plays similarly to other tower defense games, showing the path the bowls will take in green and allowing users to place milk towers with different effects in a grid world to prevent them from reaching the end.
-                </br\>
-                </p>
-                <img style="height: 40%" class="mdl-cell mdl-cell--4-col" src="images/cerealkiller.png"/>
-              </div>
-              <div class="mdl-card__actions">
-                <a href="https://github.com/teirce/LudumDare32" class="mdl-button">Source</a>
-                <a href="Projects/CerealKiller/index.html" class="mdl-button">Play</a>
-              </div>
-            </div>
-          </section>
         </div>
         <div class="mdl-layout__tab-panel" id="papers">
             <!-- about section -->
             <section class="section--center mdl-grid mdl-grid--no-spacing">
                 <div class="mdl-cell mdl-cell--12-col">
                     <h1>Papers</h1>
-                    <p>
-                        This site is currently under construction!  While much of the site is functional, content will is being added on a regular basis.  <br/>
-                        Last content update: Februrary 4th, 2016
-                    </p>
+                    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
+                      <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                          <h4 class="mdl-cell mdl-cell--8-col">MCM 2015: Finding a Downed Plane in Open Water</h4>
+                          <div class="mdl-cell mdl-cell--4-col">
+                              <p>Collaborated With</p>
+                              <ul>
+                                  <li>
+                                      Connor Bell
+                                  </li>
+                                  <li>
+                                      Elizabeth Dye
+                                  </li>
+                              </ul>
+                          </div>
+                          <p class="mdl-cell mdl-cell--8-col">
+                              Transoceanic fight has become a regular occurrence; there are as many as 770 transatlantic fights aloneper day (1).  However, when a aircraft flies over an ocean it becomes signicantly more dicult to trackby radar.  For this reason, it is dicult to find aircraft that have lost contact with their respective controltowers.  Finding downed aircraft quickly is vital to the safety of passengers and faith of the consumers.
+                              <br  />
+                              This paper explores techniques to minimize the search space and increase the chance of success for rescue teams.  
+                          </br\>
+                          </p>
+                          <img style="height: 40%" class="mdl-cell mdl-cell--4-col" src="images/mcm_2015_preview.png"/>
+                        </div>
+                        <div class="mdl-card__actions">
+                          <a href="/images/mcm_2015.pdf" class="mdl-button">Paper</a>
+                          <a href="http://www.comap.com/undergraduate/contests/" class="mdl-button">MCM Details</a>
+                        </div>
+                      </div>
+                    </section>
                 </div>
             </section>
         </div>
@@ -230,6 +269,11 @@
               <li><a href="#">Help</a></li>
               <li><a href="#">Privacy and Terms</a></li>
             </ul>
+          </div>
+          <div class="mdl-mega-footer--bottom-section">
+              <div class="mdl-logo">
+                  Copyright &copy John McAvey 2016
+              </div>
           </div>
         </footer>
       </main>
