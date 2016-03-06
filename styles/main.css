@@ -27,6 +27,11 @@ html, body {
 .mdl-demo .mdl-layout__header-row {
   padding-left: 40px;
 }
+
+.mdl-layout__header--scroll {
+    background: url('../images/header.jpg') center / cover;
+}
+
 .mdl-demo .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
   font-size: inherit;
 }
