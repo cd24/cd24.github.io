@@ -28,6 +28,10 @@ html, body {
   padding-left: 40px;
 }
 
+div img {
+    width: 100%
+}
+
 .mdl-layout__header--scroll {
     background: url('../images/header.jpg') center / cover;
 }

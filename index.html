@@ -63,22 +63,19 @@
           <a href="#about" class="mdl-layout__tab">About</a>
           <a href="#projects" class="mdl-layout__tab">Projects</a>
           <a href="#papers" class="mdl-layout__tab">Papers</a>
-          <a href="#contact" class="mdl-layout__tab">Contact</a>
         </div>
       </header>
       <main class="mdl-layout__content">
         <div class="mdl-layout__tab-panel is-active" id="home">
           <section class="section--center mdl-grid mdl-grid--no-spacing">
-              <div class="mdl-cell mdl-cell--12-col">
+              <div class="mdl-cell mdl-cell--4-col">
+                  <img src="images/mug.jpg" alt="Self Portrait"/>
+              </div>
+              <div class="mdl-cell mdl-cell--1-col">
 
               </div>
-              <img src="images/mug.jpg" alt="Self Portrait" class="mdl-cell mdl-cell--4-col"/>
-              <p class="mdl-cell mdl-cell--1-col"></p>
               <p class="mdl-cell mdl-cell--7-col">
                   My name is John McAvey and I have been involved in Information Technology and Computer Science for the bulk of my life.  My interests in biology and computer science have provided me the oppertunity to continually grow as a life-long learner.  My work as an IT infrastructure techinitian has given me insight into how technology is being employed to revolutionize the workplace as well as how to quickly and effectively create minimalist functional environments.  This experience has helped me to develop intuitive user interfaces for applications I design.  In addition to my work at school, I enjoy physical activites such as basketball, and historical martial arts such as german longsword.
-                  <br />
-                  <br />
-                  Last content update: March 8th, 2016
               </p>
           </section>
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
@@ -88,6 +85,31 @@
             <section class="section--center mdl-grid mdl-grid--no-spacing">
                 <div class="mdl-cell mdl-cell--12-col">
                     <h3>Work Experience</h3>
+                    <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
+                      <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                          <div class="mdl-cell mdl-cell--10-col">
+                              <h4>Stony Brook University</h4>
+                              <h5>May 2015</h5>
+                          </div>
+
+                          <div class="mdl-cell mdl-cell--2-col">
+                              <img style="width:100px; height:100px;" src="images/stony_logo.jpg" alt="MRE Consulting Logo" />
+                          </div>
+                          <p class="mdl-cell mdl-cell--12-col">
+                              Researched the application of managed, type-safe languages to the Intel Software Guard Extensions (SGX) chip.  This project focused on implementing an application-separation toolkit and runtime for Java applications to leverage the security features of the Intel SGX security features.
+                          </p>
+                          <ul class="mdl-cell mdl-cell--12-col">
+                              <li>Implemented Java Native Interface (JNI) code for Inter Process Communication (IPC)</li>
+                              <li>Implemented a specialized Remote Procedure Call library leveraging Java Dynamic Proxies, CGLib, and the Java Native Interface. </li>
+                          </ul>
+                        </div>
+                        <div class="mdl-card__actions">
+                          <a href="http://www.mre-consulting.com" class="mdl-button">Website</a>
+                        </div>
+                      </div>
+                    </section>
+
                     <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
                       <div class="mdl-card mdl-cell mdl-cell--12-col">
                         <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
@@ -122,12 +144,12 @@
                         </div>
                       </div>
                     </section>
+
                     <div class="mdl-cell mdl-cell--12-col">
                         <br />
                     </div>
                     <p>For a complete list of my work experience please see my <a href="https://www.linkedin.com/in/johnmcavey">LinkedIn</a> page</p>
                 </div>
-
                 <div class="mdl-cell mdl-cell--2-col">
                     <a href="/images/resume.pdf" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Resume</a>
                 </div>
@@ -142,6 +164,35 @@
             <!-- about section -->
         </div>
         <div class="mdl-layout__tab-panel" id="projects">
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                <h4 class="mdl-cell mdl-cell--12-col">Liftracker</h4>
+                <br class="mdl-cell mdl-cell--12-col" \>
+                <p class="mdl-cell mdl-cell--8-col">
+                    Liftracker is a simple iOS app designed to make weight training trackable.  This app is designed for people who want to track their weight training progress without having to worry with navigating all the extranious features of other applications.  Liftracker has simple analytical tools built in and aims to provide the user with the most effective experience possible.  Get the app out of your way, and get to training!
+                </p>
+                <div id="ltcar" class="carousel slide mdl-cell mdl-cell--4-col" data-ride="carousel" interval="1000">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="images/lt_mg_br.jpg" alt="Liftracker Statistical Views" />
+                        </div>
+                        <div class="item">
+                            <img src="images/liftracker2.jpg" alt="Rep addition view" />
+                        </div>
+                        <div class="item">
+                            <img src="images/liftracker3.jpg" alt="Today View" />
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+              <div class="mdl-card__actions">
+                <a href="https://itunes.apple.com/us/app/liftracker/id1074527528?ls=1&mt=8" class="mdl-button mdl-button">App Store</a>
+                <a href="https://github.com/cd24/Liftracker" class="mdl-button">Source</a>
+              </div>
+            </div>
+          </section>
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
@@ -160,44 +211,16 @@
                         </li>
                     </ul>
                 </div>
-                <p class="mdl-cell mdl-cell--12-col">
+                <p class="mdl-cell mdl-cell--8-col">
                     Civet is a research project exploring the application of managed languages, such as the Java Virtual Machine, to Intel's <a href="https://software.intel.com/en-us/blogs/2013/09/26/protecting-application-secrets-with-intel-sgx">SGX</a> chip.  This project uses the Graphene library operating system to seperate secure and insecure Java execution and memory.  This project is still under construction, so the runtime code is currently unavailable.  However, the build tool is available to be viewed on github!
                 </p>
-                <img style="height: 100%" class="mdl-cell mdl-cell--4-col" src="images/civet.png"/>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <img src="images/civet.png" alt="Civet Terminal Execution"/>
+                </div>
               </div>
               <div class="mdl-card__actions">
                 <a href="#projects" class="mdl-button mdl-button--disabled">Civet Code</a>
                 <a href="https://github.com/cd24/JVMSGX-Builder" class="mdl-button">Builder Code</a>
-              </div>
-            </div>
-          </section>
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--3dp">
-            <div class="mdl-card mdl-cell mdl-cell--12-col">
-              <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-                <h4 class="mdl-cell mdl-cell--12-col">Liftracker</h4>
-                <br class="mdl-cell mdl-cell--12-col" \>
-                <p class="mdl-cell mdl-cell--8-col">
-                    Liftracker is a simple iOS app designed to make weight training trackable.  This app is designed for people who want to track their weight training progress without having to worry with navigating all the extranious features of other applications.  Liftracker has simple analytical tools built in and aims to provide the user with the most effective experience possible.  Get the app out of your way, and get to training!
-                    (Coming to the App Store soon)
-                </p>
-                <div id="ltcar" class="carousel slide mdl-cell mdl-cell--4-col" data-ride="carousel" interval="1000">
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="images/lt_mg_br.jpg" alt="Liftracker Statistical Views" />
-                        </div>
-                        <div class="item">
-                            <img src="images/liftracker2.jpg" alt="Rep addition view" />
-                        </div>
-                        <div class="item">
-                            <img src="images/liftracker3.jpg" alt="Today View" />
-                        </div>
-                    </div>
-
-                </div>
-              </div>
-              <div class="mdl-card__actions">
-                <a href="#projects" class="mdl-button mdl-button--disabled">App Store</a>
-                <a href="https://github.com/cd24/Liftracker" class="mdl-button">Source</a>
               </div>
             </div>
           </section>
@@ -219,9 +242,24 @@
                 <br class="mdl-cell mdl-cell--12-col" \>
                 <p class="mdl-cell mdl-cell--8-col">
                     Cereal Killer is a web tower defense game built in the Unity engine.  This game was designed using the unity editor and written in C#.  This project was written as a submission to the LudumDare competition.  The LudumDare competition is a weekend-long competition where game developers create a game in response to a theme.  This submission was in response to the theme "an unconventional weapon," in this case milk!  The game plays similarly to other tower defense games, showing the path the bowls will take in green and allowing users to place milk towers with different effects in a grid world to prevent them from reaching the end.
-                </br\>
                 </p>
-                <img style="height: 40%" class="mdl-cell mdl-cell--4-col" src="images/cerealkiller.png"/>
+                <div id="ltcar" class="carousel slide mdl-cell mdl-cell--4-col" data-ride="carousel" interval="2000">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="images/cereal_menu.png" alt="Main Menu" />
+                        </div>
+                        <div class="item">
+                            <img src="images/cerealkiller.png" alt="Game Play" />
+                        </div>
+                        <div class="item">
+                            <img src="images/ingame.png" alt="Game Play" />
+                        </div>
+                        <div class="item">
+                            <img src="images/insufficient_funds.png" alt="Insufficient Funds View" />
+                        </div>
+                    </div>
+
+                </div>
               </div>
               <div class="mdl-card__actions">
                 <a href="https://github.com/teirce/LudumDare32" class="mdl-button">Source</a>
@@ -234,7 +272,7 @@
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h4 class="mdl-cell mdl-cell--12-col">Java SQLite Interface</h4>
                 <br class="mdl-cell mdl-cell--12-col" \>
-                <p class="mdl-cell mdl-cell--8-col">
+                <p class="mdl-cell mdl-cell--12-col">
                     While working on a databases project in Hendrix's Scalable Software class, I began to notice I was writing SQL queries which were largely reptetive.  The natural solution: write a library to do it for me!  This project is designed to be a tool to allow developers using Java and SQLite to quickly write applications without having to manually manage tables.  Most notably, it posseses the ability to automatically save and query the database using user defined fields, generate tables automatically by reflecting over provided classes, and perform basic database maintenance without the developers intervention.  This project is still under development - next is automated migrations between database schemas!
                 </br\>
                 </p>
@@ -249,7 +287,7 @@
               <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                 <h4 class="mdl-cell mdl-cell--12-col">Logo Interpreter</h4>
                 <br class="mdl-cell mdl-cell--12-col" \>
-                <p class="mdl-cell mdl-cell--8-col">
+                <p class="mdl-cell mdl-cell--12-col">
                     The Logo language is designed to direct a 'turtle' around the screen.  It allows users to specify instructions such as pen-up/down, left, right, forward, and backward.  In our scalable software class, we designed Logo interpreters using the Gramblr parsing engine.  This interpreter is a GUI for writing Logo code and interacting with the turtle.
                 </br\>
                 </p>
@@ -297,32 +335,25 @@
                 </div>
             </section>
         </div>
-        <div class="mdl-layout__tab-panel" id="contact">
-            <section class="section--center mdl-grid mdl-grid--no-spacing">
-                <div class="mdl-cell mdl-cell--12-col">
-                    <p>
-                        If you want to know more, shoot me an e-mail or check out my work on GitHub!
-                    </p>
-                    <a href="https://www.linkedin.com/in/johnmcavey" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">LinkedIn</a>
-                    <a href="https://github.com/cd24" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Github</a>
-                    <a href="mailto:john@mcavey.net" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">email</a>
-                </div>
-            </section>
-        </div>
         <footer class="mdl-mega-footer">
           <div class="mdl-mega-footer--bottom-section">
-            <div class="mdl-logo">
-              More Information
-            </div>
-            <ul class="mdl-mega-footer--link-list">
-              <li><a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a></li>
-              <li><a href="#">Help</a></li>
-              <li><a href="#">Privacy and Terms</a></li>
-            </ul>
+              <div class="mdl-logo">
+                  Contact Info
+              </div>
+              <ul class="mdl-mega-footer--link-list">
+                  <li>
+                      <a href="https://github.com/cd24">GitHub</a>
+                  </li>
+                  <li>
+                      <a href="https://www.linkedin.com/in/johnmcavey">LinkedIn</a>
+                  </li>
+              </ul>
           </div>
           <div class="mdl-mega-footer--bottom-section">
               <div class="mdl-logo">
-                  Copyright &copy John McAvey 2016
+                  Copyright &copy John McAvey 2016.  <br />
+                  Made with <a href="https://developers.google.com/web/starter-kit/">Web Starter Kit</a>.<br />
+                  Last content update: March 26th, 2016
               </div>
           </div>
         </footer>
