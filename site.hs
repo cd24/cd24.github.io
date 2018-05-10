@@ -24,10 +24,18 @@ main = hakyll $ do
     match "jobs/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/job.html" jobCtx
+            >>= loadAndApplyTemplate "templates/job.html" metaCtx
             >>= relativizeUrls
 
-    create ["archive.html"] $ do
+    match "papers/*" $ do
+        route $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/paper.html" metaCtx
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= relativizeUrls
+
+
+    create ["blog.html"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
@@ -46,13 +54,26 @@ main = hakyll $ do
         compile $ do
           jobs <- recentFirst =<< loadAll "jobs/*"
           let jobsCtx =
-                listField "alljobs" jobCtx (return jobs) `mappend`
+                listField "alljobs" metaCtx (return jobs) `mappend`
                 constField "title" "Work History" `mappend`
                 defaultContext
           makeItem ""
             >>= loadAndApplyTemplate "templates/job-list.html" jobsCtx
             >>= loadAndApplyTemplate "templates/default.html" jobsCtx
             >>= relativizeUrls
+
+    create ["papers.html"] $ do
+        route idRoute
+	compile $ do
+	     papers <- recentFirst =<< loadAll "papers/*"
+	     let papersCtx =
+ 	     	  listField "posts" metaCtx (return papers) `mappend`
+		  constField "title" "Papers" `mappend`
+		  defaultContext
+             makeItem ""
+                  >>= loadAndApplyTemplate "templates/post-list.html" papersCtx
+                  >>= loadAndApplyTemplate "templates/default.html" papersCtx
+                  >>= relativizeUrls
 
     match "index.html" $ do
         route idRoute
@@ -78,10 +99,5 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
-jobCtx :: Context String
-jobCtx = mconcat
-  [
-    dateField "date" "%B %e, %Y",
-    metadataField,
-    defaultContext
-  ]
+metaCtx :: Context String
+metaCtx = postCtx `mappend` metadataField
