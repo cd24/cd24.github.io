@@ -49,13 +49,13 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-    create ["about.html"] $ do
+    create ["work.html"] $ do
         route idRoute
         compile $ do
           jobs <- recentFirst =<< loadAll "jobs/*"
           let jobsCtx =
                 listField "alljobs" metaCtx (return jobs) `mappend`
-                constField "title" "Work History" `mappend`
+                constField "title" "Work" `mappend`
                 defaultContext
           makeItem ""
             >>= loadAndApplyTemplate "templates/job-list.html" jobsCtx

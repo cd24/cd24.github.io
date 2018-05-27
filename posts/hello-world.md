@@ -1,5 +1,5 @@
 ---
-title: A new look
+title: A New Look
 date: 2018-05-09
 ---
 
