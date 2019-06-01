@@ -2,6 +2,7 @@
 title: Software Engineer
 image: images/FO-logo.jpg
 company: First Orion
+companyurl: http://firstorion.com
 ---
 
 Working at First Orion, I developed machine learning models,iOS, Android applications to help protect consumers from fraudulent and unwanted calls. My primary responsibilities were:

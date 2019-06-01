@@ -1,6 +1,7 @@
 ---
 title: A New Look
 date: 2018-05-09
+categories: Personal
 ---
 
 # Hello world!

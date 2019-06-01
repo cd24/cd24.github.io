@@ -2,6 +2,7 @@
 title: Research Assistant
 image: images/stony-logo.jpg
 company: StonyBrook University
+companyurl: http://stonybrook.edu
 ---
 Researched the application of managed, type-safe languages to the Intel Software Guard Extensions (SGX) chip. This project focused on implementing an application-separation toolkit and runtime for Java applications to leverage the security features of the Intel SGX security features.
 

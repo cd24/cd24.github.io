@@ -1,15 +1,19 @@
-<div style="width: 100%; overflow: auto;">
-  <div style="width: 12%; float: left;">
-    <image src="./$image$" style="width: 100%; margin-top: 20%; margin-bottom: 20%;">
-  </div>
-  <div style="width: 85%; float: right;">
-    <div>
-      <h3 style="display: inline-block">
-
-      $title$ <br />
-      $company$
-      </h3>
+<div style="width: 90%; height: 80px; display: inline-block; vertical-align: middle;">
+    <image src="./$image$" style="float: left; width: 55px; height: 55px; margin-top: 10pt" >
+    <div style="margin-left: 5%;  display: inline-block; height: 60px;">
+        <h3 style="margin-bottom: 4px;">$title$</h3>
+        <h4 style="margin-top: 4px;">
+            $if(companyurl)$
+            <a href="$companyurl$">
+            $endif$
+                $company$
+            $if(companyurl)$
+            </a>
+            $endif$
+        </h4>
     </div>
-  </div>
 </div>
-$body$
+<br />
+<div style="margin-top: 10pt">
+    $body$
+</div>
