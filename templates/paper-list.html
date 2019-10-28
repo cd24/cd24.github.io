@@ -1,0 +1,20 @@
+<div style="display: flex; flex-direction: column; justify-content: space-between;">
+    $for(papers)$
+    <div style="display: flex; flex-direction: row; justify-content: space-between; margin: 0.8%">
+        <div>
+            <b>
+                <a href="$url$">$title$</a> -
+                $if(conference)$ $conference$ $endif$
+                $if(journal)$ $journal$ $endif$ $year$
+            </b>
+            <br />
+            &emsp;$authors$
+        </div>
+        $if(pdf)$
+        <div>[<a href="/$pdf$">PDF</a>]</div>
+        $endif$
+    </div>
+    <br />
+    <!--Here-->
+    $endfor$
+</div>

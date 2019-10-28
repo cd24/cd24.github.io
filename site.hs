@@ -1,18 +1,30 @@
 
 --------------------------------------------------------------------------------
-{-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid (mappend)
+{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TemplateHaskell     #-}
+
+import           Data.Monoid                     (mappend)
 import           Hakyll
 
-import Data.List (isPrefixOf, tails, findIndex, intercalate, sortBy)
-import Data.Maybe (fromMaybe)
-import Control.Applicative (Alternative (..))
-import Control.Monad (forM_, zipWithM_, liftM)
+import           Control.Applicative             (Alternative (..))
+import           Control.Monad                   (forM_, liftM, zipWithM_)
+import           Data.Csv
+import           Data.List                       (findIndex, intercalate,
+                                                  isPrefixOf, sortBy, tails)
+import           Data.Maybe                      (fromMaybe)
 
-import Text.Blaze.Html.Renderer.String (renderHtml)
-import Text.Blaze.Html ((!), toHtml, toValue)
-import qualified Text.Blaze.Html5 as H
-import qualified Text.Blaze.Html5.Attributes as A
+import qualified Data.ByteString.Lazy            as BL
+import           Data.List.Split
+import qualified Data.Vector                     as V
+import           Text.Blaze.Html                 (toHtml, toValue, (!))
+import           Text.Blaze.Html.Renderer.String (renderHtml)
+import qualified Text.Blaze.Html5                as H
+import qualified Text.Blaze.Html5.Attributes     as A
+
+orElse :: Maybe a -> a -> a
+orElse Nothing def  = def
+orElse (Just val) _ = val
 
 postsGlob :: Pattern
 postsGlob = "posts/**.md"
@@ -25,6 +37,10 @@ main :: IO ()
 main = hakyll $ do
     match "images/*" $ do
         route   idRoute
+        compile copyFileCompiler
+
+    match "papers/files/*" $ do
+        route idRoute
         compile copyFileCompiler
 
     match "css/*" $ do
@@ -64,7 +80,7 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll postsGlob
             let archiveCtx =
-                    listField "posts" postCtx (return (reverse posts)) `mappend`
+                    listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Blog"                `mappend`
                     field "categorylist" (\_ -> renderTagListLines postCategories) `mappend`
                     defaultContext
@@ -87,28 +103,29 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "templates/default.html" jobsCtx
             >>= relativizeUrls
 
-
+    peerList <- preprocess $ fmap (fmap peer) peerInfo
     create ["papers.html"] $ do
         route idRoute
-	compile $ do
-	     papers <- recentFirst =<< loadAll papersGlob
-	     let papersCtx =
- 	     	  listField "posts" metaCtx (return papers) `mappend`
-		  constField "title" "Papers" `mappend`
-                  field "categorylist" (\_ -> renderTagListLines paperCategories) `mappend`
-		  defaultContext
-             makeItem ""
-                  >>= loadAndApplyTemplate "templates/post-list.html" papersCtx
-                  >>= loadAndApplyTemplate "templates/default.html" papersCtx
-                  >>= relativizeUrls
+        compile $ do
+            papers <- recentFirst =<< loadAll papersGlob
+            let archiveCtx =
+                    listField "papers" (paperCtx peerList) (return papers) `mappend`
+                    constField "title" "Papers"                `mappend`
+                    field "categorylist" (\_ -> renderTagListLines paperCategories) `mappend`
+                    defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/paper-list.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                >>= relativizeUrls
 
     create ["rss.xml"] $ do
-      route idRoute
-      compile $ do
-        let feedCtx = postCtx `mappend` bodyField "description"
-        posts <- fmap (take 10) . recentFirst =<<
-            loadAllSnapshots "posts/*" "blog"
-        renderRss blogFeedConfiguration feedCtx posts
+        route idRoute
+        compile $ do
+            let feedCtx = postCtx `mappend` bodyField "description"
+            posts <- fmap (take 10) . recentFirst =<<
+                loadAllSnapshots "posts/*" "blog"
+            renderRss blogFeedConfiguration feedCtx posts
 
     match "index.html" $ do
         route idRoute
@@ -129,10 +146,48 @@ main = hakyll $ do
 
 --------------------------------------------------------------------------------
 
+data Peer = Peer String String
+
+peerInfo :: IO [(String, String)]
+peerInfo = do
+    csvData <- BL.readFile "peers.csv"
+    case decode NoHeader csvData of
+        Left _  -> return []
+        Right v -> return $ V.toList v
+
+peer :: (String, String) -> Peer
+peer (name, website) = Peer name website
+
+find :: String -> [Peer] -> Maybe Peer
+find _ [] = Nothing
+find fid (p@(Peer entryID _ ):xs) | entryID == fid = Just p
+                                  | otherwise = find fid xs
+
+peerLink :: Peer -> String
+peerLink (Peer name website) = "<a href=" ++ website ++ ">" ++ name ++ "</a>"
+
+displayContentFor :: [Peer] -> String -> String
+displayContentFor peers pid = valueOrDefault $ link currentPeer
+    where
+        link = fmap peerLink
+        currentPeer = find pid peers
+        valueOrDefault = flip orElse pid
+
+authorsLine :: [Peer] -> String -> String
+authorsLine peers = intercalate ", " . fmap (displayContentFor peers) . splitOn ", "
+
+authorsCtx :: [Peer] -> Context String
+authorsCtx peers = field "authors" $ \item -> do
+    metadata <- getMetadata (itemIdentifier item)
+    return $ fromMaybe "" $ authorsLine peers <$> lookupString "authors" metadata
+
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
+
+paperCtx :: [Peer] -> Context String
+paperCtx peers = authorsCtx peers `mappend` postCtx
 
 metaCtx :: Context String
 metaCtx = postCtx `mappend` metadataField
@@ -161,9 +216,9 @@ rulesForTags tags titleForTag =
     compile $ do
         posts <- recentFirst =<< loadAll pattern
         let ctx = constField "title" title
-                  `mappend` listField "posts" postCtx (return posts)
-                  `mappend` field "categorylist" (\_ -> renderTagListLines tags)
-                  `mappend` defaultContext
+                    `mappend` listField "posts" postCtx (return posts)
+                    `mappend` field "categorylist" (\_ -> renderTagListLines tags)
+                    `mappend` defaultContext
 
         makeItem ""
             >>= loadAndApplyTemplate "templates/tag.html" ctx

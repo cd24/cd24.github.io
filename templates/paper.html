@@ -1,10 +1,20 @@
 <article>
     <section class="header">
-        Posted on $date$
-        $if(author)$
-            by $author$
+        $if(conference)$
+        $conference$ - $year$
+        <br />
         $endif$
-	<p><a href="/$pdf$">PDF</a></p>
+        $if(journal)$
+        $journal$ - $year$
+        <br />
+        $endif$
+        $if(authors)$
+        Authors: $authors$
+        $endif$
+        $if(pdf)$
+        <br />
+        <p><a href="/$pdf$">PDF</a></p>
+        $endif$
     </section>
     <section>
         $body$
