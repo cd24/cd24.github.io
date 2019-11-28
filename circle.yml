@@ -3,10 +3,7 @@ jobs:
   build:
     docker:
       - image: debian:stretch
-
-    machine:
-      ghc:
-      version: 7.10.1
+      
     steps:
       - checkout
       - run: wget https://github.com/commercialhaskell/stack/releases/download/v1.6.1/stack-1.6.1-linux-x86_64.tar.gz -O /tmp/stack.tar.gz
