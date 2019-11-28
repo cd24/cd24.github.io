@@ -2,13 +2,21 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: fpco/stack-build:lts
       
     steps:
       - checkout
-      - run: curl -sSL https://get.haskellstack.org/ | sh
-      - run: stack setup
-      - run: stack build
+      - restore_cache:
+          name: Restore Cached Dependencies
+          keys:
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
+      - run: 
+        name: Dependencies
+        command: stack setup
+      - run:
+        name: Build
+        command: stacl build
       - run: cd _site/ && git add --all
       - run: cd _site/ && git commit -m "Update (`date '+%F %T %Z'`) [ci skip]"
       - run: cd _site/ && git push origin master
