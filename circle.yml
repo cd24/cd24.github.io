@@ -6,23 +6,8 @@ jobs:
       
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Cached Dependencies
-          keys:
-            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
-            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run: stack setup
       - run: stacl build
-      - save_cache:
-         name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
-          paths:
-            - "/root/.stack"
-            - ".stack-work"
-      - store_artifacts:
-          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: _site
-          destination: site
       - run: cd _site/ && git add --all
       - run: cd _site/ && git commit -m "Update (`date '+%F %T %Z'`) [ci skip]"
       - run: cd _site/ && git push origin master
