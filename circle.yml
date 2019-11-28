@@ -1,0 +1,16 @@
+machine:
+  ghc:
+    version: 7.10.1
+
+steps:
+  - checkout
+  - run: wget https://github.com/commercialhaskell/stack/releases/download/v1.6.1/stack-1.6.1-linux-x86_64.tar.gz -O /tmp/stack.tar.gz
+  - run: sudo mkdir /tmp/stack-download
+  - run: sudo tar -xzf /tmp/stack.tar.gz -C /tmp/stack-download
+  - run: sudo chmod +x /tmp/stack-download/stack-1.6.1-linux-x86_64/stack
+  - run: sudo mv /tmp/stack-download/stack-1.6.1-linux-x86_64/stack /usr/bin/stack
+  - run: stack setup
+  - run: stack build
+  - run: cd _site/ && git add --all
+  - run: cd _site/ && git commit -m "Update (`date '+%F %T %Z'`) [ci skip]"
+  - run: cd _site/ && git push origin master
