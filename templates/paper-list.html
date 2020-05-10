@@ -4,8 +4,12 @@
         <div>
             <b>
                 <a href="$url$">$title$</a> -
-                $if(conference)$ $conference$ $endif$
-                $if(journal)$ $journal$ $endif$ $year$
+                $if(conference)$
+                $if(conferencepage)$ <a href="$conferencepage$"> $endif$
+                    $conference$
+                    $endif$
+                    $if(journal)$ $journal$ $endif$ $year$
+                    $if(conferencepage)$ </a> $endif$
             </b>
             <br />
             &emsp;$authors$

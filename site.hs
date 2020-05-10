@@ -53,6 +53,8 @@ main = hakyll $ do
     rulesForTags postCategories (\tag -> "Posts in category \"" ++ tag ++ "\"")
     rulesForTags paperCategories (\tag -> "Papers in category \"" ++ tag ++ "\"")
 
+    peerList <- preprocess $ fmap (fmap $ uncurry Peer) peerInfo
+
     match postsGlob $ do
         route $ setExtension "html"
         compile $ pandocCompiler
@@ -71,7 +73,7 @@ main = hakyll $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/paper.html" metaCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= loadAndApplyTemplate "templates/default.html" (postCtx `mappend` (paperCtx peerList))
             >>= relativizeUrls
 
 
@@ -103,7 +105,6 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "templates/default.html" jobsCtx
             >>= relativizeUrls
 
-    peerList <- preprocess $ fmap (fmap peer) peerInfo
     create ["papers.html"] $ do
         route idRoute
         compile $ do
@@ -154,9 +155,6 @@ peerInfo = do
     case decode NoHeader csvData of
         Left _  -> return []
         Right v -> return $ V.toList v
-
-peer :: (String, String) -> Peer
-peer (name, website) = Peer name website
 
 find :: String -> [Peer] -> Maybe Peer
 find _ [] = Nothing

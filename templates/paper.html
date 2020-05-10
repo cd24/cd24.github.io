@@ -1,13 +1,15 @@
 <article>
     <section class="header">
-        $if(conference)$
-        $conference$ - $year$
-        <br />
-        $endif$
-        $if(journal)$
-        $journal$ - $year$
-        <br />
-        $endif$
+        $if(conferencepage)$ <a href="$conferencepage$"> $endif$
+            $if(conference)$
+            $conference$ - $year$
+            <br />
+            $endif$
+            $if(journal)$
+            $journal$ - $year$
+            <br />
+            $endif$
+            $if(conferencepage)$ </a> $endif$
         $if(authors)$
         Authors: $authors$
         $endif$
