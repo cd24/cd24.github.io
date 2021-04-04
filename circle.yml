@@ -5,9 +5,23 @@ jobs:
       - image: fpco/stack-build:lts
       
     steps:
+      - run: 
+          name: "install tools"
+          command: |
+            sudo apt update && sudo apt install ruby && gem install html-proofer
       - checkout
       - run: stack setup
       - run: stack build
-      - run: cd _site/ && git add --all
-      - run: cd _site/ && git commit -m "Update (`date '+%F %T %Z'`) [ci skip]"
-      - run: cd _site/ && git push origin master
+      - run: 
+          name: "Check for issues"
+          command: |
+            htmlproofer $HUGO_BUILD_DIR --allow-hash-href --check-html \
+            --empty-alt-ignore --disable-external
+      - deploy:
+          name: deploy to the main branch
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "hakyll" ]; then
+              git subtree split --branch main --prefix _site/
+            else
+              echo "Not deployment branch, dry run only"
+            fi
