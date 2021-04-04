@@ -18,7 +18,7 @@ jobs:
           name: "Build site compiler"
           command: |
             stack build
-      -run: 
+      - run: 
           name: "Build site"
           command: |
             stack exec site build
