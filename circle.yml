@@ -10,8 +10,18 @@ jobs:
           command: |
             sudo apt update && sudo apt install ruby && gem install html-proofer
       - checkout
-      - run: stack setup
-      - run: stack build
+      - run:
+          name: "Setup stack"
+          command: |
+            stack setup
+      - run: 
+          name: "Build site compiler"
+          command: |
+            stack build
+      -run: 
+          name: "Build site"
+          command: |
+            stack exec site build
       - run: 
           name: "Check for issues"
           command: |
